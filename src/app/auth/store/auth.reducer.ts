@@ -1,6 +1,5 @@
-import { createReducer, on } from '@ngrx/store';
-import { User } from '../../core/model/user/user';
-import { UserRole } from '../../core/model/user/userRole';
+import { Action, createReducer, on } from '@ngrx/store';
+import { User, UserRole } from '@core';
 import * as AuthActions from './auth.actions';
 
 export const authFeatureKey = 'auth';
@@ -21,6 +20,7 @@ export const initialState: Auth = {
   user: {
     mail: '',
     userName: '',
+    token: '',
     userRole: [new UserRole('')],
   },
   status: Status.INIT,
@@ -32,6 +32,9 @@ const reducer = createReducer(
     ...state,
     loggedIn: true,
     user: action.user,
+  })),
+  on(AuthActions.getUser, (state, action) => ({
+    ...state,
   })),
   on(
     AuthActions.registerUser,
@@ -53,3 +56,7 @@ const reducer = createReducer(
     ...initialState,
   }))
 );
+
+export const authReducer = (state: Auth, action: Action): Auth => {
+  return reducer(state, action);
+};

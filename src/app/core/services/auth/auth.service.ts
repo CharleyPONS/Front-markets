@@ -14,7 +14,7 @@ export class AuthService {
     return this._apiService.post(`${this.path}/signin`, user);
   }
 
-  public registerUser(user: User) {
+  public registerUser(user: User): Observable<User> {
     return this._apiService.post(`${this.path}/signup`, user);
   }
 }

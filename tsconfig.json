@@ -22,8 +22,9 @@
       "dom"
     ],
     "paths": {
-      "@layout": ["./layout/index.ts"],
-      "@auth": ["./auth/index.ts"]
+      "@layout": ["./src/app/layout/index.ts"],
+      "@auth": ["./src/app/auth/index.ts"],
+      "@core": ["./src/app/core"]
     }
   },
   "angularCompilerOptions": {

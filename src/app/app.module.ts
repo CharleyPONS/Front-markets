@@ -9,7 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LayoutModule } from './layout';
+import { LayoutModule } from '@layout';
 
 @NgModule({
   declarations: [AppComponent],

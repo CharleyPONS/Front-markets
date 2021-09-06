@@ -8,6 +8,7 @@ export class User {
   public favoriteMarket?: string;
   public password?: string;
   public userRole?: Array<UserRole>;
+  public token: string;
 
   constructor(data: User) {
     this.mail = data?.mail;
@@ -17,5 +18,6 @@ export class User {
     this.favoriteMarket = data?.favoriteMarket;
     this.password = data?.password;
     this.userRole = data?.userRole;
+    this.token = data?.token || '';
   }
 }

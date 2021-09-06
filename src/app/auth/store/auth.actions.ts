@@ -1,26 +1,22 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from '../../core/model/user/user';
+import { User } from '@core';
 
-export const authenticateUser = createAction('[Auth] Load Auths');
-
+export const getUser = createAction('[Auth] GET_USER');
+export const authenticateUser = createAction('[Auth] AUTHENTICATE_USER');
 export const authenticateUserSuccess = createAction(
-  '[Auth] Load Auths Success',
+  '[Auth] AUTHENTICATE_USER_SUCCESS',
   props<{ user: User }>()
 );
-
 export const authenticateUserFailed = createAction(
-  '[Auth] Load Auths Failure',
+  '[Auth] AUTHENTICATE_USER_FAILED',
   props<{ error: any }>()
 );
-
-export const registerUser = createAction('[Auth] Load Auths');
-
+export const registerUser = createAction('[Auth] REGISTER_USER');
 export const registerUserSuccess = createAction(
-  '[Auth] Load Auths Success',
+  '[Auth] REGISTER_USER_SUCCESS',
   props<{ user: User }>()
 );
-
 export const registerUserFailed = createAction(
-  '[Auth] Load Auths Failure',
+  '[Auth] REGISTER_USER_FAILED',
   props<{ error: any }>()
 );
