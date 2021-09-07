@@ -15,7 +15,7 @@ export enum Status {
   IN_PROGRESS = 'IN_PROGRESS',
 }
 
-export const initialState: Auth = {
+export const authInitialState: Auth = {
   loggedIn: false,
   user: {
     mail: '',
@@ -27,13 +27,13 @@ export const initialState: Auth = {
 };
 
 const reducer = createReducer(
-  initialState,
+  authInitialState,
   on(AuthActions.authenticateUserSuccess, (state, action) => ({
     ...state,
     loggedIn: true,
     user: action.user,
   })),
-  on(AuthActions.getUser, (state, action) => ({
+  on(AuthActions.getUser, (state, _) => ({
     ...state,
   })),
   on(
@@ -50,13 +50,13 @@ const reducer = createReducer(
     user: action.user,
   })),
   on(AuthActions.authenticateUserFailed, (state, action) => ({
-    ...initialState,
+    ...authInitialState,
   })),
   on(AuthActions.registerUserFailed, (state, action) => ({
-    ...initialState,
+    ...authInitialState,
   }))
 );
 
-export const authReducer = (state: Auth, action: Action): Auth => {
+export const authReducer = (state: Auth | undefined, action: Action): Auth => {
   return reducer(state, action);
 };

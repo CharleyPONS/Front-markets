@@ -1,4 +1,4 @@
-export { FormsModule } from './forms/forms.module';
+export { CoreModule } from './core.module';
 export * from './model/user/user';
 export * from './model/user/userRole';
 export * from './model/form/source-form.enum';
@@ -8,3 +8,4 @@ export * from './forms/store/ngrx-forms.facade';
 export * from './forms/store/ngrx-forms.selectors';
 export * from './services/jwt.service';
 export * from './utils/removeNullUndefined';
+export * from './forms/store/ngrx-forms.interface';

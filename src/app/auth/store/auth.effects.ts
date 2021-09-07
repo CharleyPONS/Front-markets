@@ -10,12 +10,15 @@ import {
   catchError,
   tap,
 } from 'rxjs/operators';
+import { of } from 'rxjs';
+
 import {
   AuthService,
   JwtService,
   NgrxFormsFacade,
   SourceFormEnum,
   User,
+  UserRole,
   UserService,
 } from '@core';
 
@@ -46,8 +49,10 @@ export class AuthEffects {
   public authenticateUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.authenticateUser),
+      tap((action) => console.log(action)),
       withLatestFrom(this.ngrxFormFacade.data$, this.ngrxFormFacade.source$),
-      filter(([action, source]) => source === SourceFormEnum.LOGIN),
+      tap((data) => console.log(data)),
+      filter(([action, data, source]) => source === SourceFormEnum.LOGIN),
       exhaustMap(([action, data]) =>
         this.authService
           .authenticateUser(data)
@@ -63,15 +68,16 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.registerUser),
       withLatestFrom(this.ngrxFormFacade.data$, this.ngrxFormFacade.source$),
-      filter(([action, source]) => source === SourceFormEnum.REGISTER),
+      tap((data) => console.log('ARRAY OF STREAM', data)),
+      filter(([action, data, source]) => source === SourceFormEnum.REGISTER),
       exhaustMap(([action, data]) =>
-        this.authService
-          .registerUser(data)
-          .pipe(
-            map((response: User) =>
-              AuthActions.registerUserSuccess({ user: new User(response) })
-            )
+        this.authService.registerUser(data).pipe(
+          map((response: User) =>
+            AuthActions.registerUserSuccess({
+              user: new User({ ...response, userRole: [new UserRole('USER')] }),
+            })
           )
+        )
       )
     )
   );

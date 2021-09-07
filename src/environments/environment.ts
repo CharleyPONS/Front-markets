@@ -4,8 +4,8 @@
 
 export const environment = {
   apiPath: '/api',
-  apiUrl: 'http://0.0.0.0:4200',
-  production: false
+  apiUrl: 'http://0.0.0.0:4201',
+  production: false,
 };
 
 /*

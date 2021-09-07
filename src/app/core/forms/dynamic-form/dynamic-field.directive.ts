@@ -12,7 +12,7 @@ import { FormGroup } from '@angular/forms';
 
 import { InputComponent } from '../fields/input/input.component';
 import { TextareaComponent } from '../fields/textarea/textarea.component';
-import { Field } from '../store/ngrx-forms.interface';
+import { Field } from '@core';
 
 const componentsMapper: { [key: string]: Type<any> } = {
   INPUT: InputComponent,

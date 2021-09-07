@@ -1,1 +1,26 @@
-<p>login works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 col-xs-12">
+      <h2 class="text-center">Connectez-vous</h2>
+      <p [routerLink]="['./register']" class="text-center">
+        Créez votre compte
+      </p>
+    </div>
+  </div>
+
+  <app-dynamic-form
+    (updateForm)="updateForm($event)"
+    [data$]="data$"
+    [structure$]="structure$"
+  >
+  </app-dynamic-form>
+  <div class="row">
+    <div class="col-md-6 offset-md-3 col-xs-12">
+      <div class="text-center">
+        <button (click)="submit()" class="btn btn-lg btn-primary" type="submit">
+          Connectez-vous
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@ import {
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, map, takeUntil, tap, filter } from 'rxjs/operators';
-import { Field } from '../store/ngrx-forms.interface';
+import { Field } from '@core';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -33,10 +33,10 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
       .pipe(
         map((structure) => this.formBuilder(structure)),
         tap((f) => (this.form = f)),
-        tap((f) => this.listenFormChanges(f)),
+        tap((f) => this._listenFormChanges(f)),
         takeUntil(this.unsubscribe$)
       )
-      .subscribe((f) => this.patchValue(f, this.data$));
+      .subscribe((f) => this._patchValue(f, this.data$));
 
     if (this.touchedForm$) {
       this.touchedForm$
@@ -65,17 +65,17 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     return this.fb.control('', field.validator);
   };
 
-  private patchValue = (form: FormGroup, data: Observable<any>) => {
+  private _patchValue = (form: FormGroup, data: Observable<any>) => {
     !!data
       ? form.patchValue(data, { emitEvent: false })
       : form.patchValue({}, { emitEvent: false });
   };
 
-  private listenFormChanges(form: FormGroup) {
+  private _listenFormChanges(form: FormGroup) {
     form.valueChanges
       .pipe(
         debounceTime(100),
-        tap((f) => this.patchValue(f, this.data$)),
+        tap((f) => this._patchValue(this.form, this.data$)),
         takeUntil(this.unsubscribe$)
       )
       .subscribe((changes: any) => {

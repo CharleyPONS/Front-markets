@@ -6,19 +6,26 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/auth.effects';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { AuthService, FormsModule } from '@core';
+import { AuthService, CoreModule } from '@core';
 import { StoreModule } from '@ngrx/store';
-import { authFeatureKey, authReducer } from './store/auth.reducer';
+import {
+  authFeatureKey,
+  authReducer,
+  authInitialState,
+} from './store/auth.reducer';
+import { AuthFacade } from './store/auth.facade';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
-    FormsModule,
-    StoreModule.forFeature(authFeatureKey, authReducer),
+    CoreModule,
+    StoreModule.forFeature(authFeatureKey, authReducer, {
+      initialState: authInitialState,
+    }),
     EffectsModule.forFeature([AuthEffects]),
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthFacade, AuthEffects],
 })
 export class AuthModule {}

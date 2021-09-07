@@ -7,9 +7,10 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './core/interceptors/request.interceptors';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LayoutModule } from '@layout';
+import { EffectsModule } from '@ngrx/effects';
+import { environment } from '@env/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { LayoutModule } from '@layout';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     LayoutModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     NgbModule,

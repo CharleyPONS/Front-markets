@@ -13,23 +13,27 @@ export class NgrxFormsFacade {
 
   constructor(private store: Store<NgrxFormsState>) {}
 
-  setStructure(structure: any) {
+  public setStructure(structure: any) {
     this.store.dispatch(NgrxFormsActions.setStructure({ structure }));
   }
 
-  setData(data: any) {
+  public setSource(source: any) {
+    this.store.dispatch(NgrxFormsActions.setSource({ source }));
+  }
+
+  public setData(data: any) {
     this.store.dispatch(NgrxFormsActions.setData({ data }));
   }
 
-  updateData(data: any) {
+  public updateData(data: any) {
     this.store.dispatch(NgrxFormsActions.updateData({ data }));
   }
 
-  initializeForm() {
+  public initializeForm() {
     this.store.dispatch(NgrxFormsActions.initializeForm());
   }
 
-  resetForm() {
+  public resetForm() {
     this.store.dispatch(NgrxFormsActions.resetForm());
   }
 }

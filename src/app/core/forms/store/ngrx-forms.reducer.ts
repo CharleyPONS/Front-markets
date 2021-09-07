@@ -22,6 +22,10 @@ const reducer = createReducer(
     ...state,
     data: action.data,
   })),
+  on(NgrxFormsActions.setSource, (state, action) => ({
+    ...state,
+    source: action.source,
+  })),
   on(NgrxFormsActions.updateData, (state, action) => {
     const data = { ...state.data, ...action.data };
     return { ...state, data, touched: true };
